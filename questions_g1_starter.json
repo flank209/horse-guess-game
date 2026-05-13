@@ -1,0 +1,247 @@
+[
+  {
+    "id": "won_february_stakes",
+    "text": "フェブラリーSを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_takamatsunomiya_kinen",
+    "text": "高松宮記念を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_osaka_hai",
+    "text": "大阪杯を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_oka_sho",
+    "text": "桜花賞を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_satsuki_sho",
+    "text": "皐月賞を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_tenno_sho_spring",
+    "text": "天皇賞・春を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_nhk_mile_cup",
+    "text": "NHKマイルCを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_victoria_mile",
+    "text": "ヴィクトリアマイルを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_yushun_himba",
+    "text": "オークスを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_tokyo_yushun",
+    "text": "日本ダービーを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_yasuda_kinen",
+    "text": "安田記念を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_takarazuka_kinen",
+    "text": "宝塚記念を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_sprinters_stakes",
+    "text": "スプリンターズSを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_shuka_sho",
+    "text": "秋華賞を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_kikuka_sho",
+    "text": "菊花賞を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_tenno_sho_autumn",
+    "text": "天皇賞・秋を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_elizabeth_queen_cup",
+    "text": "エリザベス女王杯を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_mile_championship",
+    "text": "マイルCSを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_japan_cup",
+    "text": "ジャパンCを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_champions_cup",
+    "text": "チャンピオンズC／ジャパンCダートを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_hanshin_juvenile_fillies",
+    "text": "阪神JF／阪神3歳牝馬Sを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_asahi_hai_futurity_stakes",
+    "text": "朝日杯FS／朝日杯3歳Sを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_arima_kinen",
+    "text": "有馬記念を勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_hopeful_stakes",
+    "text": "ホープフルSを勝っていますか？",
+    "category": "具体的なG1"
+  },
+  {
+    "id": "won_overseas_g1",
+    "text": "海外G1を勝っていますか？",
+    "category": "路線"
+  },
+  {
+    "id": "won_sprint_g1",
+    "text": "短距離G1を勝っていますか？",
+    "category": "距離"
+  },
+  {
+    "id": "won_mile_g1",
+    "text": "マイルG1を勝っていますか？",
+    "category": "距離"
+  },
+  {
+    "id": "won_2000plus_g1",
+    "text": "2000m以上のG1を勝っていますか？",
+    "category": "距離"
+  },
+  {
+    "id": "won_2400plus_g1",
+    "text": "2400m以上のG1を勝っていますか？",
+    "category": "距離"
+  },
+  {
+    "id": "won_3000plus_g1",
+    "text": "3000m以上のG1を勝っていますか？",
+    "category": "距離"
+  },
+  {
+    "id": "won_classic_g1",
+    "text": "クラシックG1を勝っていますか？",
+    "category": "路線"
+  },
+  {
+    "id": "won_2yo_g1",
+    "text": "2歳G1を勝っていますか？",
+    "category": "路線"
+  },
+  {
+    "id": "won_female_limited_g1",
+    "text": "牝馬限定G1を勝っていますか？",
+    "category": "路線"
+  },
+  {
+    "id": "won_dirt_g1",
+    "text": "ダートG1/Jpn1を勝っていますか？",
+    "category": "路線"
+  },
+  {
+    "id": "won_same_g1_twice",
+    "text": "同じG1を複数回勝っていますか？",
+    "category": "戦績"
+  },
+  {
+    "id": "won_haneda_hai",
+    "text": "羽田盃を勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_tokyo_derby",
+    "text": "東京ダービーを勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_sakitama_hai",
+    "text": "さきたま杯を勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_kashiwa_kinen",
+    "text": "かしわ記念を勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_kawasaki_kinen",
+    "text": "川崎記念を勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_teio_sho",
+    "text": "帝王賞を勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_japan_dirt_derby",
+    "text": "ジャパンダートダービーを勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_japan_dirt_classic",
+    "text": "ジャパンダートクラシックを勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_mile_championship_nambu_hai",
+    "text": "マイルCS南部杯を勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_jbc_classic",
+    "text": "JBCクラシックを勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_jbc_sprint",
+    "text": "JBCスプリントを勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_jbc_ladies_classic",
+    "text": "JBCレディスクラシックを勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_zen_nippon_nisai_yushun",
+    "text": "全日本2歳優駿を勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  },
+  {
+    "id": "won_tokyo_daishoten",
+    "text": "東京大賞典を勝っていますか？",
+    "category": "地方交流Jpn1・地方G1"
+  }
+]

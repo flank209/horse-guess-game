@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#7d3f18" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="競走馬10質問" />
+  <title>競走馬10質問ゲーム</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">G1複数勝利馬 Guess Game</p>
+        <h1>競走馬10質問ゲーム</h1>
+        <p class="lead">年代と性別だけをヒントに、10問以内のYes/No質問でアプリが選んだ馬を当てるゲームです。</p>
+        <p class="mobile-lead">スマホでは下へ進むだけで遊べます。</p>
+      </div>
+      <div class="hero-actions">
+        <button id="newGameButton" class="primary">新しい馬で始める</button>
+        <button id="giveUpButton" class="ghost">降参して答えを見る</button>
+      </div>
+    </header>
+
+    <section id="loadPanel" class="card notice hidden">
+      <h2>データを読み込んでください</h2>
+      <p>
+        このHTMLをダブルクリックで開いている場合、ブラウザの制限でCSV/JSONを自動読み込みできないことがあります。
+        その場合は下のボタンから <strong>horses_g1_multi_starter.csv</strong> と <strong>questions_g1_starter.json</strong> を選んでください。
+      </p>
+      <div class="file-grid">
+        <label>
+          馬データCSV
+          <input id="horseFileInput" type="file" accept=".csv,text/csv" />
+        </label>
+        <label>
+          質問JSON
+          <input id="questionFileInput" type="file" accept=".json,application/json" />
+        </label>
+      </div>
+      <p id="loadStatus" class="status-text"></p>
+    </section>
+
+    <main class="layout">
+      <section class="card hint-card">
+        <div class="section-heading">
+          <h2>ヒント</h2>
+          <span id="dataCount" class="pill">読み込み中</span>
+        </div>
+        <div class="hint-grid">
+          <div>
+            <span class="label">年代</span>
+            <strong id="era">---</strong>
+          </div>
+          <div>
+            <span class="label">性別</span>
+            <strong id="sex">---</strong>
+          </div>
+          <div>
+            <span class="label">対象</span>
+            <strong>G1複数勝利馬</strong>
+          </div>
+          <div>
+            <span class="label">質問数</span>
+            <strong><span id="questionCount">0</span>/10問</strong>
+          </div>
+        </div>
+        <div class="progress" aria-label="質問数の進行状況">
+          <span id="questionProgress"></span>
+        </div>
+      </section>
+
+      <section class="card stats-card">
+        <div class="section-heading">
+          <h2>正解率</h2>
+          <button id="resetStatsButton" class="mini-button">記録をリセット</button>
+        </div>
+        <div class="stats-grid">
+          <div>
+            <span class="label">ゲーム正解率</span>
+            <strong id="gameAccuracy">---</strong>
+          </div>
+          <div>
+            <span class="label">終了ゲーム</span>
+            <strong><span id="gamesFinished">0</span>回</strong>
+          </div>
+          <div>
+            <span class="label">正解</span>
+            <strong><span id="correctGames">0</span>回</strong>
+          </div>
+          <div>
+            <span class="label">降参</span>
+            <strong><span id="giveUps">0</span>回</strong>
+          </div>
+          <div>
+            <span class="label">馬名回答正解率</span>
+            <strong id="guessAccuracy">---</strong>
+          </div>
+          <div>
+            <span class="label">馬名回答数</span>
+            <strong><span id="nameGuesses">0</span>回</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="card answer-card">
+        <h2>アプリの回答</h2>
+        <p id="answer" class="answer-text">まだ質問していません。</p>
+      </section>
+
+      <section class="card question-card">
+        <div class="section-heading">
+          <div>
+            <h2>質問を選ぶ</h2>
+            <p class="helper-text">カテゴリを横にスクロールして選べます。</p>
+          </div>
+          <button id="showAllButton" class="mini-button">全質問を表示</button>
+        </div>
+        <div id="categoryTabs" class="tabs"></div>
+        <div id="questionButtons" class="question-buttons"></div>
+      </section>
+
+      <section class="card guess-card">
+        <h2>馬名を答える</h2>
+        <div class="guess-row">
+          <input id="guessInput" type="text" placeholder="例：アーモンドアイ" autocomplete="off" list="horseNameList" inputmode="text" />
+          <datalist id="horseNameList"></datalist>
+          <button id="guessButton" class="primary">回答する</button>
+        </div>
+        <p id="result" class="result-text"></p>
+      </section>
+
+      <section class="card history-card">
+        <div class="section-heading">
+          <h2>質問履歴</h2>
+          <button id="clearHistoryButton" class="mini-button">履歴だけ消す</button>
+        </div>
+        <ol id="history" class="history-list"></ol>
+      </section>
+
+      <section class="card answer-detail hidden" id="answerDetail">
+        <h2>正解馬の情報</h2>
+        <dl>
+          <dt>馬名</dt><dd id="detailName"></dd>
+          <dt>G1勝利数</dt><dd id="detailG1Wins"></dd>
+          <dt>JRA平地G1勝ち鞍</dt><dd id="detailJraWins"></dd>
+          <dt>海外G1勝ち鞍</dt><dd id="detailOverseasWins"></dd>
+          <dt>地方交流Jpn1・地方G1勝ち鞍</dt><dd id="detailDirtWins"></dd>
+          <dt>メモ</dt><dd id="detailNotes"></dd>
+        </dl>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

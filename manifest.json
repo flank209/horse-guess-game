@@ -1,0 +1,26 @@
+{
+  "id": "horse-guess-10q",
+  "name": "競走馬10質問ゲーム",
+  "short_name": "競走馬10Q",
+  "description": "G1複数勝利馬を10問以内で当てる競走馬クイズです。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff7ee",
+  "theme_color": "#7d3f18",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
