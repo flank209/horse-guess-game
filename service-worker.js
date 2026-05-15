@@ -1,4 +1,4 @@
-const CACHE_NAME = "horse-guess-10q-v1";
+const CACHE_NAME = "horse-guess-10q-v2-1980s";
 const ASSETS = [
   "./",
   "./index.html",

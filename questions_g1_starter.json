@@ -145,11 +145,6 @@
     "category": "距離"
   },
   {
-    "id": "won_3000plus_g1",
-    "text": "3000m以上のG1を勝っていますか？",
-    "category": "距離"
-  },
-  {
     "id": "won_classic_g1",
     "text": "クラシックG1を勝っていますか？",
     "category": "路線"
@@ -165,83 +160,18 @@
     "category": "路線"
   },
   {
-    "id": "won_dirt_g1",
-    "text": "ダートG1/Jpn1を勝っていますか？",
-    "category": "路線"
-  },
-  {
     "id": "won_same_g1_twice",
     "text": "同じG1を複数回勝っていますか？",
     "category": "戦績"
   },
   {
-    "id": "won_haneda_hai",
-    "text": "羽田盃を勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
+    "id": "won_dirt_g1",
+    "text": "ダートG1/Jpn1級を勝っていますか？",
+    "category": "路線"
   },
   {
-    "id": "won_tokyo_derby",
-    "text": "東京ダービーを勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_sakitama_hai",
-    "text": "さきたま杯を勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_kashiwa_kinen",
-    "text": "かしわ記念を勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_kawasaki_kinen",
-    "text": "川崎記念を勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_teio_sho",
-    "text": "帝王賞を勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_japan_dirt_derby",
-    "text": "ジャパンダートダービーを勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_japan_dirt_classic",
-    "text": "ジャパンダートクラシックを勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_mile_championship_nambu_hai",
-    "text": "マイルCS南部杯を勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_jbc_classic",
-    "text": "JBCクラシックを勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_jbc_sprint",
-    "text": "JBCスプリントを勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_jbc_ladies_classic",
-    "text": "JBCレディスクラシックを勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_zen_nippon_nisai_yushun",
-    "text": "全日本2歳優駿を勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
-  },
-  {
-    "id": "won_tokyo_daishoten",
-    "text": "東京大賞典を勝っていますか？",
-    "category": "地方交流Jpn1・地方G1"
+    "id": "won_3000plus_g1",
+    "text": "3000m以上のG1を勝っていますか？",
+    "category": "距離"
   }
 ]

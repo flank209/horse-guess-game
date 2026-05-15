@@ -8,9 +8,6 @@ let secretHorse = null;
 let currentCategory = "";
 let showAllQuestions = false;
 let history = [];
-let gameResolved = false;
-const STATS_STORAGE_KEY = "horseGuessStatsV1";
-let stats = loadStats();
 
 const elements = {
   loadPanel: document.getElementById("loadPanel"),
@@ -21,93 +18,19 @@ const elements = {
   era: document.getElementById("era"),
   sex: document.getElementById("sex"),
   questionCount: document.getElementById("questionCount"),
-  questionProgress: document.getElementById("questionProgress"),
   answer: document.getElementById("answer"),
   categoryTabs: document.getElementById("categoryTabs"),
   questionButtons: document.getElementById("questionButtons"),
   history: document.getElementById("history"),
   guessInput: document.getElementById("guessInput"),
-  horseNameList: document.getElementById("horseNameList"),
   result: document.getElementById("result"),
   answerDetail: document.getElementById("answerDetail"),
   detailName: document.getElementById("detailName"),
   detailG1Wins: document.getElementById("detailG1Wins"),
   detailJraWins: document.getElementById("detailJraWins"),
   detailOverseasWins: document.getElementById("detailOverseasWins"),
-  detailDirtWins: document.getElementById("detailDirtWins"),
-  detailNotes: document.getElementById("detailNotes"),
-  gamesFinished: document.getElementById("gamesFinished"),
-  correctGames: document.getElementById("correctGames"),
-  giveUps: document.getElementById("giveUps"),
-  gameAccuracy: document.getElementById("gameAccuracy"),
-  nameGuesses: document.getElementById("nameGuesses"),
-  guessAccuracy: document.getElementById("guessAccuracy")
+  detailNotes: document.getElementById("detailNotes")
 };
-
-
-function loadStats() {
-  try {
-    const saved = localStorage.getItem(STATS_STORAGE_KEY);
-    if (!saved) return createEmptyStats();
-    return { ...createEmptyStats(), ...JSON.parse(saved) };
-  } catch (error) {
-    return createEmptyStats();
-  }
-}
-
-function createEmptyStats() {
-  return {
-    gamesFinished: 0,
-    correctGames: 0,
-    giveUps: 0,
-    nameGuesses: 0,
-    correctNameGuesses: 0
-  };
-}
-
-function saveStats() {
-  localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(stats));
-}
-
-function formatPercent(numerator, denominator) {
-  if (!denominator) return "---";
-  return `${Math.round((numerator / denominator) * 100)}%`;
-}
-
-function renderStats() {
-  elements.gamesFinished.textContent = String(stats.gamesFinished);
-  elements.correctGames.textContent = String(stats.correctGames);
-  elements.giveUps.textContent = String(stats.giveUps);
-  elements.gameAccuracy.textContent = formatPercent(stats.correctGames, stats.gamesFinished);
-  elements.nameGuesses.textContent = String(stats.nameGuesses);
-  elements.guessAccuracy.textContent = formatPercent(stats.correctNameGuesses, stats.nameGuesses);
-}
-
-function recordGameResult(result) {
-  if (gameResolved) return;
-
-  gameResolved = true;
-  stats.gamesFinished += 1;
-
-  if (result === "correct") stats.correctGames += 1;
-  if (result === "giveUp") stats.giveUps += 1;
-
-  saveStats();
-  renderStats();
-}
-
-function recordNameGuess(isCorrect) {
-  stats.nameGuesses += 1;
-  if (isCorrect) stats.correctNameGuesses += 1;
-  saveStats();
-  renderStats();
-}
-
-function resetStats() {
-  stats = createEmptyStats();
-  saveStats();
-  renderStats();
-}
 
 function parseCsv(text) {
   const rows = [];
@@ -204,7 +127,6 @@ function afterDataLoaded() {
   disableGameControls(false);
   elements.loadPanel.classList.add("hidden");
   elements.dataCount.textContent = `${horses.length}頭 / ${questions.length}問`;
-  renderHorseNameList();
   currentCategory = getCategories()[0] ?? "";
   startGame();
 }
@@ -219,12 +141,11 @@ function startGame() {
   const randomIndex = Math.floor(Math.random() * horses.length);
   secretHorse = horses[randomIndex];
   history = [];
-  gameResolved = false;
   showAllQuestions = false;
 
   elements.era.textContent = secretHorse.era || "---";
   elements.sex.textContent = secretHorse.sex || "---";
-  updateQuestionProgress();
+  elements.questionCount.textContent = `0 / ${MAX_QUESTIONS}`;
   setAnswer("まだ質問していません。", "");
   elements.result.textContent = "";
   elements.result.className = "result-text";
@@ -234,7 +155,6 @@ function startGame() {
   renderCategories();
   renderQuestions();
   renderHistory();
-  renderStats();
 }
 
 function renderCategories() {
@@ -271,9 +191,10 @@ function renderQuestions() {
     if (past?.answer === "Yes") button.classList.add("used-yes");
     if (past?.answer === "No") button.classList.add("used-no");
 
-    if (!past && history.length >= MAX_QUESTIONS) {
+    const isNewQuestion = !past;
+    if (history.length >= MAX_QUESTIONS && isNewQuestion) {
       button.disabled = true;
-      button.title = "質問は10問までです";
+      button.title = "質問は10問までです。馬名を答えるか、降参してください。";
     }
 
     button.addEventListener("click", () => answerQuestion(question));
@@ -285,7 +206,7 @@ function answerQuestion(question) {
   if (!secretHorse) return;
 
   const alreadyAsked = history.some(item => item.id === question.id);
-  if (!alreadyAsked && history.length >= MAX_QUESTIONS) {
+  if (history.length >= MAX_QUESTIONS && !alreadyAsked) {
     setAnswer("質問は10問までです。馬名を答えるか、降参してください。", "unknown");
     return;
   }
@@ -312,7 +233,7 @@ function answerQuestion(question) {
     history.push(historyItem);
   }
 
-  updateQuestionProgress();
+  elements.questionCount.textContent = `${history.length} / ${MAX_QUESTIONS}`;
   renderHistory();
   renderQuestions();
 }
@@ -320,14 +241,6 @@ function answerQuestion(question) {
 function setAnswer(text, className) {
   elements.answer.textContent = text;
   elements.answer.className = `answer-text ${className}`.trim();
-}
-
-function updateQuestionProgress() {
-  const count = history.length;
-  elements.questionCount.textContent = String(count);
-  if (elements.questionProgress) {
-    elements.questionProgress.style.width = `${Math.min(100, (count / MAX_QUESTIONS) * 100)}%`;
-  }
 }
 
 function renderHistory() {
@@ -345,18 +258,6 @@ function renderHistory() {
     li.textContent = `${item.text} → ${item.answer}`;
     elements.history.appendChild(li);
   });
-}
-
-function renderHorseNameList() {
-  if (!elements.horseNameList) return;
-  elements.horseNameList.innerHTML = "";
-  [...horses]
-    .sort((a, b) => String(a.name).localeCompare(String(b.name), "ja"))
-    .forEach(horse => {
-      const option = document.createElement("option");
-      option.value = horse.name;
-      elements.horseNameList.appendChild(option);
-    });
 }
 
 function normalizeName(name) {
@@ -379,19 +280,9 @@ function guessHorse() {
     return;
   }
 
-  if (gameResolved) {
-    elements.result.textContent = "このゲームは終了済みです。新しい馬で始めてください。";
-    elements.result.className = "result-text wrong";
-    return;
-  }
-
-  const isCorrect = userGuess === correctName;
-  recordNameGuess(isCorrect);
-
-  if (isCorrect) {
+  if (userGuess === correctName) {
     elements.result.textContent = `正解です！答えは「${secretHorse.name}」でした。`;
     elements.result.className = "result-text correct";
-    recordGameResult("correct");
     showAnswerDetail();
   } else {
     elements.result.textContent = "違います。もう少し質問してみてください。";
@@ -405,7 +296,6 @@ function showAnswerDetail() {
   elements.detailG1Wins.textContent = `${secretHorse.g1_wins_total ?? "---"}勝`;
   elements.detailJraWins.textContent = secretHorse.jra_flat_g1_win_names || "---";
   elements.detailOverseasWins.textContent = secretHorse.overseas_g1_win_names || "なし";
-  elements.detailDirtWins.textContent = secretHorse.dirt_g1_jpn1_win_names || "なし";
   elements.detailNotes.textContent = secretHorse.notes || "---";
   elements.answerDetail.classList.remove("hidden");
 }
@@ -445,7 +335,6 @@ document.getElementById("newGameButton").addEventListener("click", startGame);
 document.getElementById("giveUpButton").addEventListener("click", () => {
   if (!secretHorse) return;
   setAnswer(`答え：${secretHorse.name}`, "unknown");
-  recordGameResult("giveUp");
   showAnswerDetail();
 });
 document.getElementById("guessButton").addEventListener("click", guessHorse);
@@ -454,7 +343,7 @@ elements.guessInput.addEventListener("keydown", event => {
 });
 document.getElementById("clearHistoryButton").addEventListener("click", () => {
   history = [];
-  updateQuestionProgress();
+  elements.questionCount.textContent = `0 / ${MAX_QUESTIONS}`;
   renderHistory();
   renderQuestions();
 });
@@ -465,17 +354,6 @@ document.getElementById("showAllButton").addEventListener("click", () => {
 });
 elements.horseFileInput.addEventListener("change", handleManualFiles);
 elements.questionFileInput.addEventListener("change", handleManualFiles);
-document.getElementById("resetStatsButton").addEventListener("click", resetStats);
 
-renderStats();
 disableGameControls(true);
 loadDefaultData();
-
-
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js").catch(error => {
-      console.warn("Service worker registration failed:", error);
-    });
-  });
-}
